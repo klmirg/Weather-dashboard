@@ -40,7 +40,9 @@ var searchSubmitHandler = function(event) {
   } else {
     alert("Enter a valid city!");
   }
-  // console.log(event)
+
+  var previousSearchArr =  [];
+ 
 }
 
 
