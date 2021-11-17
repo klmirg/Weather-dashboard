@@ -47,58 +47,75 @@ var searchSubmitHandler = function(event) {
 
 var getWeather = function(citySearch) {
 
-  // var citySearch = cityInputEl.value.trim();
+  var citySearch = cityInputEl.value.trim();
 
   var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + citySearch + "&appid=" + myKey + "&units=imperial";
  fetch(apiUrl).then(function(response) {
    response.json().then(function(data) {
     //  console.log(data);
      displayWeather(data, citySearch);
+     getForecast(data);
    })
  });
 }
 
-var getForecast = function(city) {
+var getForecast = function(dataApi) {
 
-  var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid=304018960801880d53656057e380d93a";
+  // var dataApi = cityInputEl.value.trim();
+  
+  var latitude = dataApi.coord.lat;
+
+  var longitude = dataApi.coord.lon;
+  
+  var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=hourly,daily&appid=" + myKey;
   fetch(apiUrl).then(function(response) {
     response.json().then(function(data) {
-      displayWeather(data, city);
-      displayForecast(data, city);
+      console.log(data);
+      displayUvIndex(data, dataApi);
+      // displayWeather(data, city);
+      // displayForecast(data, city);
     })
   })
+}
+
+// Creating a function to display the UV index
+var displayUvIndex = function(weather) {
+
+  weatherContainerEl.textContent = "";
+
+  var uvIndexEl = document.createElement("div");
+  uvIndexEl.textContent = "UV Index: " + weather.current.uvi;
+  weatherContainerEl.appendChild(uvIndexEl);
+
 }
 
 // Figure out how to display the temperature, humidity, wind speed, and the UV index
 var displayWeather = function(weather, searchTerm) {
 
-  // clearing what is in the container
+  // Clearing what is in the weather container to display new content
   weatherContainerEl.textContent = "";
   forecastContainerEl.textContent = searchTerm;
 
+  var weatherIcons = "http://openweathermap.org/img/wn/10d@2x.png"
 
+// Creating a div and adding the temperature to it to display on the page
   var tempEl = document.createElement("div");
   tempEl.textContent = "Temperature: " + weather.main.temp + " F";
   weatherContainerEl.appendChild(tempEl);
-
+// Creating a div and adding the wind speed to it to display on the page
   var windSpeedEl = document.createElement("div");
   windSpeedEl.textContent = "Wind: " + weather.wind.speed + " MPH";
   weatherContainerEl.appendChild(windSpeedEl);
-
+// Creating a div and adding the humidity to it to display on the page
   var humidityEl = document.createElement("div");
   humidityEl.textContent = "Humidity: " + weather.main.humidity + " %";
   weatherContainerEl.appendChild(humidityEl);
 
-  var uvIndexEl = document.createElement("div");
-  uvIndexEl.textContent = "UV Index: " + weather.current.uvi;
-  weatherContainerEl.appendChild(uvIndexEl);
 };
 
-var displayForecast = function(weather2) {
+var displayForecast = function() {
 
-  // var uvIndexEl = document.createElement("div");
-  // uvIndexEl.textContent = "UV Index: " + weather2.current.uvi;
-  // weatherContainerEl.appendChild(uvIndexEl);
+  
   
   // for (var i = 0; i < 6; i++) {
   //   var cityName = cities[i].current.temp
@@ -108,11 +125,12 @@ var displayForecast = function(weather2) {
 
 var displayPreviousSearch = function(cities, searchForm) {
 
-  citySearchForm.textContent = searchForm;
+  citySearchFormEl.textContent = searchForm;
+
+  var cityName = 
 
 
 }
 
-// getWeather();
 
 citySearchFormEl.addEventListener("submit", searchSubmitHandler);
