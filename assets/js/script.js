@@ -14,6 +14,7 @@
 
 // "https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid=304018960801880d53656057e380d93a"
 
+// created a variable for my API key
 var myKey = "304018960801880d53656057e380d93a";
 
 var citySearchFormEl = document.querySelector("#search-form");
@@ -39,7 +40,7 @@ var searchSubmitHandler = function(event) {
   } else {
     alert("Enter a valid city!");
   }
-  console.log(event)
+  // console.log(event)
 }
 
 
@@ -62,7 +63,7 @@ var getForecast = function(city) {
   var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid=304018960801880d53656057e380d93a";
   fetch(apiUrl).then(function(response) {
     response.json().then(function(data) {
-      console.log(data)
+      displayWeather(data, city);
       displayForecast(data, city);
     })
   })
@@ -77,25 +78,27 @@ var displayWeather = function(weather, searchTerm) {
 
 
   var tempEl = document.createElement("div");
-  tempEl.textContent = "Temperature: " + weather.main.temp;
+  tempEl.textContent = "Temperature: " + weather.main.temp + " F";
   weatherContainerEl.appendChild(tempEl);
-  
-
-  var humidityEl = document.createElement("div");
-  humidityEl.textContent = "Humidity: " + weather.main.humidity;
-  weatherContainerEl.appendChild(humidityEl);
 
   var windSpeedEl = document.createElement("div");
-  windSpeedEl.textContent = 
+  windSpeedEl.textContent = "Wind: " + weather.wind.speed + " MPH";
+  weatherContainerEl.appendChild(windSpeedEl);
 
-  // var uvIndexEl = document.createElement("div");
-  // div.textContent = 
+  var humidityEl = document.createElement("div");
+  humidityEl.textContent = "Humidity: " + weather.main.humidity + " %";
+  weatherContainerEl.appendChild(humidityEl);
 
-
-
+  var uvIndexEl = document.createElement("div");
+  uvIndexEl.textContent = "UV Index: " + weather.current.uvi;
+  weatherContainerEl.appendChild(uvIndexEl);
 };
 
-var displayForecast = function() {
+var displayForecast = function(weather2) {
+
+  // var uvIndexEl = document.createElement("div");
+  // uvIndexEl.textContent = "UV Index: " + weather2.current.uvi;
+  // weatherContainerEl.appendChild(uvIndexEl);
   
   // for (var i = 0; i < 6; i++) {
   //   var cityName = cities[i].current.temp
