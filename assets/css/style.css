@@ -33,5 +33,9 @@ h1, h2, h3 {
 
 .form-label, .form-input, .form-textarea {
   display: block;
-  width: 95%;
+  width: 100%;
+}
+
+.weather {
+  background:chartreuse;
 }
