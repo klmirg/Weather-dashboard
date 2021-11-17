@@ -127,7 +127,8 @@ var displayPreviousSearch = function(cities, searchForm) {
 
   citySearchFormEl.textContent = searchForm;
 
-  var cityName = 
+  var cityName = document.getElementById("")
+  cityName.textContent = 
 
 
 }
