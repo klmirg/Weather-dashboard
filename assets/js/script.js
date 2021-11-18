@@ -84,9 +84,13 @@ var displayWeather = function(weather, searchTerm) {
   weatherContainerEl.textContent = "";
   forecastContainerEl.textContent = searchTerm;
   // This is a variable that allows me to use the weather icons for the page.
-  // var weatherIcons = "http://openweathermap.org/img/wn/" + weather.weather[0].icon + ".png";
-  // var weatherIconEl = document.querySelector("#weather-icon");
-  // weatherContainerEl.innerHTML = `<img src=${weatherIcons}>`;
+  var weatherIcons = "http://openweathermap.org/img/wn/" + weather.weather[0].icon + ".png";
+  var weatherIconEl = document.querySelector("#weather-icon");
+  // const {weatherIcons} = weather.weather[0];
+  weatherContainerEl.innerHTML = `<img src=${weatherIcons}>`;
+  
+
+
 
   // This is displaying the current date
   var currentDay = moment().format('MMMM Do YYYY');
@@ -94,9 +98,11 @@ var displayWeather = function(weather, searchTerm) {
   currentDayEl.textContent = currentDay;
   weatherContainerEl.appendChild(currentDayEl);
 
+
+
 // Creating a div and adding the temperature to it to display on the page.
   var tempEl = document.createElement("div");
-  tempEl.textContent = "Temperature: " + weather.current.temp + " F";
+  tempEl.textContent = "Temperature: " + weather.current.temp + '\u00B0' + " F";
   weatherContainerEl.appendChild(tempEl);
 // Creating a div and adding the wind speed to it to display on the page.
   var windSpeedEl = document.createElement("div");
@@ -110,6 +116,8 @@ var displayWeather = function(weather, searchTerm) {
   var uvIndexEl = document.createElement("div");
   uvIndexEl.textContent = "UV Index: " + weather.current.uvi;
   weatherContainerEl.appendChild(uvIndexEl);
+
+  // document.getElementById('weather-icon').src=`http://openweathermap.org/img/w/${weather.weather[0].icon}.png`;
 };
 
 
@@ -126,7 +134,7 @@ console.log(futureWeather);
    forecastContainerEl.appendChild(futureDaysEl);
 
    var tempEl = document.createElement("div");
-   tempEl.textContent = "Temperature: " + forecastWeather.temp.day + " F";
+   tempEl.textContent = "Temperature: " + forecastWeather.temp.day + '\u00B0' + " F";
    forecastContainerEl.appendChild(tempEl);
 
    var windSpeedEl = document.createElement("div");
