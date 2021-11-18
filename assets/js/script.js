@@ -132,10 +132,6 @@ console.log(futureWeather);
    futureDaysEl.textContent = futureDays;
    forecastContainerEl.appendChild(futureDaysEl);
 
-   var weatherIcons = "http://openweathermap.org/img/wn/" + forecastWeather.weather[0].icon + ".png";
-   var weatherIconEl = document.querySelector("#weather-icon");
-   forecastContainerEl.innerHTML = `<img src=${weatherIcons}>`;
-
    var tempEl = document.createElement("div");
    tempEl.textContent = "Temperature: " + forecastWeather.temp.day + '\u00B0' + " F";
    forecastContainerEl.appendChild(tempEl);
@@ -148,6 +144,11 @@ console.log(futureWeather);
    humidityEl.textContent = "Humidity: " + forecastWeather.humidity + " %";
    forecastContainerEl.appendChild(humidityEl);
 
+   var icon = document.createElement("img");
+   icon.style.width = "50px";
+   icon.src = "http://openweathermap.org/img/wn/" + forecastWeather.weather[0].icon + ".png";
+   
+   forecastContainerEl.appendChild(icon);
   }
 }
 
