@@ -1,17 +1,14 @@
-
-// When I view the UV Index,
-// I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
-
-
 // created a variable for my API key
 var myKey = "304018960801880d53656057e380d93a";
 
+var searchHistory = [];
 var citySearchFormEl = document.querySelector("#search-form");
 var cityInputEl = document.querySelector(".form-input")
 
 var weatherContainerEl = document.querySelector("#weather-container");
 var forecastContainerEl = document.querySelector("#forecast-container");
-var cityContainerEl = document.querySelector("#card");
+//var cityContainerEl = document.querySelector("#card");
+var searchHistoryEl = document.getElementById("searchHistory");
  
 
 // var targetDate = new Date();
@@ -25,7 +22,7 @@ var searchSubmitHandler = function(event) {
   // Creating a place to put the current city you searched for and appending it to a container
   var citySearchEl = document.createElement("h2");
   citySearchEl.textContent = citySearch;
-  cityContainerEl.appendChild(citySearchEl);
+  searchHistoryEl.appendChild(citySearchEl);
 
   if (citySearch) {
     getWeather(citySearch);
@@ -33,18 +30,41 @@ var searchSubmitHandler = function(event) {
   } else {
     alert("Enter a valid city!");
   }
+  saveSearch(citySearch);
+}
 
-  var previousSearchArr =  [];
- 
+var saveSearch = function(citySearch) {
+  
+  if(searchHistory.indexOf(citySearch) !== -1){
+    return;
+  }
+  searchHistory.push(citySearch)
+  localStorage.setItem("citySearch", JSON.stringify(searchHistory));
+  renderSearchHistory()
+}
+
+var renderSearchHistory = function(){
+searchHistoryEl.innerHTML = '';
+
+for(var i=searchHistory.length -1; i >=0; i--){
+  var button = document.createElement("button");
+  button.setAttribute("type", "button")
+  button.setAttribute("class", "historyBtn")
+
+  button.setAttribute("data-search", searchHistory[i])
+  button.textContent = searchHistory[i]
+  searchHistoryEl.append(button);
+  }
 }
 
 
+//var savedSearch = JSON.parse(localStorage.getItem("citySearch")) || [];
 
 var getForecast = function(dataApi) {
 // Creating the variables for latitude and longitude
   var latitude = dataApi.coord.lat;
   var longitude = dataApi.coord.lon;
-
+// fetching the api
   var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=hourly&appid=" + myKey + "&units=imperial";
  fetch(apiUrl).then(function(response) {
    response.json().then(function(data) {
@@ -79,17 +99,12 @@ var displayWeather = function(weather, searchTerm) {
   var weatherIcons = "http://openweathermap.org/img/wn/" + weather.current.weather[0].icon + ".png";
   var weatherIconEl = document.querySelector("#weather-icon");
   weatherContainerEl.innerHTML = `<img src=${weatherIcons}>`;
-  
-
-
 
   // This is displaying the current date
   var currentDay = moment().format('MMMM Do YYYY');
   var currentDayEl = document.createElement("h3");
   currentDayEl.textContent = currentDay;
   weatherContainerEl.appendChild(currentDayEl);
-
-
 
 // Creating a div and adding the temperature to it to display on the page.
   var tempEl = document.createElement("div");
@@ -104,8 +119,22 @@ var displayWeather = function(weather, searchTerm) {
   humidityEl.textContent = "Humidity: " + weather.current.humidity + " %";
   weatherContainerEl.appendChild(humidityEl);
 // Creating a div and adding the UV index to display on the page.
-  var uvIndexEl = document.createElement("div");
-  uvIndexEl.textContent = "UV Index: " + weather.current.uvi;
+  var uvIndexEl = document.createElement("button");
+
+  var uvIndex = weather.current.uvi;
+
+  if(uvIndex < 3){
+    uvIndexEl.setAttribute("class", "btn-success")
+  } else if(uvIndex < 6){
+    uvIndexEl.setAttribute("class", "btn-warning")
+  } else if(uvIndex < 10){
+    uvIndexEl.setAttribute("class", "btn-danger")
+  } 
+  // else {
+  //   uvIndexEl.setAttribute("class", "danger")
+  // }
+
+  uvIndexEl.textContent = "UV Index: " + uvIndex;
   weatherContainerEl.appendChild(uvIndexEl);
 };
 
@@ -142,17 +171,14 @@ console.log(futureWeather);
   }
 }
 
+// var displayPreviousSearch = function(cities, searchForm) {
 
-var displayPreviousSearch = function(cities, searchForm) {
+//   citySearchFormEl.textContent = searchForm;
 
-  citySearchFormEl.textContent = searchForm;
+//   var cityName = document.getElementById("")
+//   // cityName.textContent = 
+// }
 
-  var cityName = document.getElementById("")
-  // cityName.textContent = 
-
-
-}
-
-
+searchHistoryEl.addEventListener("click",)
 
 citySearchFormEl.addEventListener("submit", searchSubmitHandler);

@@ -39,3 +39,20 @@ h1, h2, h3 {
 .weather {
   background:chartreuse;
 }
+
+.safe{
+  color: green;
+}
+
+.mild{
+  color: orange
+}
+
+.high{
+  color: red;
+}
+
+.danger{
+  color: purple;
+}
+
