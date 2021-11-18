@@ -52,7 +52,7 @@ var getForecast = function(dataApi) {
   var latitude = dataApi.coord.lat;
   var longitude = dataApi.coord.lon;
 
-  var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=hourly,daily&appid=" + myKey + "&units=imperial";
+  var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=hourly&appid=" + myKey + "&units=imperial";
  fetch(apiUrl).then(function(response) {
    response.json().then(function(data) {
      displayWeather(data, dataApi);
@@ -106,12 +106,13 @@ var displayWeather = function(weather, searchTerm) {
   weatherContainerEl.appendChild(uvIndexEl);
 };
 
-var displayForecast = function(futureweather, searchTerm) {
+var displayForecast = function(futureWeather, searchTerm) {
 
+  console.log(futureWeather)
   forecastContainerEl.textContent = searchTerm;
 
   // var cityName = cities[i].current.temp
-  for (var i = 0; i < 5; i++) {
+  for (var i = 0; i < futureWeather.daily[5] ; i++) {
 
    var futureDays = moment().add(i, 'days').format('L');
    var futureDaysEl = document.createElement("h3");
@@ -119,15 +120,15 @@ var displayForecast = function(futureweather, searchTerm) {
    forecastContainerEl.appendChild(futureDaysEl);
 
    var tempEl = document.createElement("div");
-   tempEl.textContent = "Temperature: " + futureweather.current.temp + " F";
+   tempEl.textContent = "Temperature: " + futureWeather.current.temp + " F";
    forecastContainerEl.appendChild(tempEl);
 
    var windSpeedEl = document.createElement("div");
-   windSpeedEl.textContent = "Wind: " + futureweather.current.wind_speed + " MPH";
+   windSpeedEl.textContent = "Wind: " + futureWeather.current.wind_speed + " MPH";
    forecastContainerEl.appendChild(windSpeedEl);
 
    var humidityEl = document.createElement("div");
-   humidityEl.textContent = "Humidity: " + futureweather.current.humidity + " %";
+   humidityEl.textContent = "Humidity: " + futureWeather.current.humidity + " %";
    forecastContainerEl.appendChild(humidityEl);
 
   }
