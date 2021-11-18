@@ -1,15 +1,6 @@
-// When I search for a city, then I am presented with...
-// current and future conditions for that city and the city is added to the search history
-// When I view current weather conditions for that city
-// I am presented with the city name, the date, an icon representation of weather conditions,
-// the temperature, the humidity, the wind speed, and the UV Index
+
 // When I view the UV Index,
 // I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
-// When I view future weather conditions for that city
-// I am presented with a 5-day forecast that displays the date, an icon representations of 
-// weather conditions, the temperature, the wind speed, and the humidity
-// When I click on a city in the search history
-// I am presented with current and future conditions for that city
 
 
 // created a variable for my API key
@@ -79,10 +70,11 @@ var getWeather = function(citySearch) {
 
 // Figure out how to display the temperature, humidity, wind speed, and the UV index
 var displayWeather = function(weather, searchTerm) {
-console.log(weather);
+
   // Clearing what is in the weather container to display new content
   weatherContainerEl.textContent = "";
-  forecastContainerEl.textContent = searchTerm;
+  // forecastContainerEl.textContent = searchTerm;
+  forecastContainerEl.innerHTML = "";
   // This is a variable that allows me to use the weather icons for the page.
   var weatherIcons = "http://openweathermap.org/img/wn/" + weather.current.weather[0].icon + ".png";
   var weatherIconEl = document.querySelector("#weather-icon");
@@ -115,15 +107,13 @@ console.log(weather);
   var uvIndexEl = document.createElement("div");
   uvIndexEl.textContent = "UV Index: " + weather.current.uvi;
   weatherContainerEl.appendChild(uvIndexEl);
-
-  // document.getElementById('weather-icon').src=`http://openweathermap.org/img/w/${weather.weather[0].icon}.png`;
 };
 
 
 var displayForecast = function(futureWeather) {
 console.log(futureWeather);
-  // var cityName = cities[i].current.temp
-  for (var i = 1; i < 5 ; i++) {
+  // for loop to loop through the 5 days
+  for (var i = 0; i < 5 ; i++) {
     // Making a variable for future weather
   var forecastWeather = futureWeather.daily[i];
 
