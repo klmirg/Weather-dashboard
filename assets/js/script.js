@@ -33,7 +33,7 @@ var searchSubmitHandler = function(event) {
   event.preventDefault();
 
   var citySearch = cityInputEl.value.trim();
-
+console.log(citySearch)
   if (citySearch) {
     getWeather(citySearch);
     cityInputEl.value = "";
@@ -47,48 +47,31 @@ var searchSubmitHandler = function(event) {
 
 
 
-var getWeather = function(citySearch) {
+var getForecast = function(dataApi) {
+// Creating the variables for latitude and longitude
+  var latitude = dataApi.coord.lat;
+  var longitude = dataApi.coord.lon;
 
-  var citySearch = cityInputEl.value.trim();
-
-  var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + citySearch + "&appid=" + myKey + "&units=imperial";
+  var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=hourly,daily&appid=" + myKey + "&units=imperial";
  fetch(apiUrl).then(function(response) {
    response.json().then(function(data) {
-    //  console.log(data);
-     displayWeather(data, citySearch);
-     getForecast(data);
+     displayWeather(data, dataApi);
+     displayForecast(data, dataApi);
    })
  });
 }
 
-var getForecast = function(dataApi) {
-
-  // var dataApi = cityInputEl.value.trim();
+var getWeather = function(citySearch) {
+// Creating the variable for what city is searched for
+  var citySearch = cityInputEl.value.trim();
   
-  var latitude = dataApi.coord.lat;
-
-  var longitude = dataApi.coord.lon;
-  
-  var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=hourly,daily&appid=" + myKey;
+  var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + citySearch + "&appid=" + myKey + "&units=imperial";
   fetch(apiUrl).then(function(response) {
     response.json().then(function(data) {
-      console.log(data);
-      displayUvIndex(data, dataApi);
-      // displayWeather(data, city);
-      // displayForecast(data, city);
+      getForecast(data); 
+      // displayForecast(data, citySearch);
     })
   })
-}
-
-// Creating a function to display the UV index
-var displayUvIndex = function(weather) {
-
-  weatherContainerEl.textContent = "";
-
-  var uvIndexEl = document.createElement("div");
-  uvIndexEl.textContent = "UV Index: " + weather.current.uvi;
-  weatherContainerEl.appendChild(uvIndexEl);
-
 }
 
 // Figure out how to display the temperature, humidity, wind speed, and the UV index
@@ -97,31 +80,60 @@ var displayWeather = function(weather, searchTerm) {
   // Clearing what is in the weather container to display new content
   weatherContainerEl.textContent = "";
   forecastContainerEl.textContent = searchTerm;
-
+  // This allows me to use the weather icons for the page.
   var weatherIcons = "http://openweathermap.org/img/wn/10d@2x.png"
 
-// Creating a div and adding the temperature to it to display on the page
-  var tempEl = document.createElement("div");
-  tempEl.textContent = "Temperature: " + weather.main.temp + " F";
-  weatherContainerEl.appendChild(tempEl);
-// Creating a div and adding the wind speed to it to display on the page
-  var windSpeedEl = document.createElement("div");
-  windSpeedEl.textContent = "Wind: " + weather.wind.speed + " MPH";
-  weatherContainerEl.appendChild(windSpeedEl);
-// Creating a div and adding the humidity to it to display on the page
-  var humidityEl = document.createElement("div");
-  humidityEl.textContent = "Humidity: " + weather.main.humidity + " %";
-  weatherContainerEl.appendChild(humidityEl);
+  var currentDay = moment().format('MMMM Do YYYY');
+  var currentDayEl = document.createElement("h2");
+  currentDayEl.textContent = currentDay;
+  weatherContainerEl.appendChild(currentDayEl);
 
+// Creating a div and adding the temperature to it to display on the page.
+  var tempEl = document.createElement("div");
+  tempEl.textContent = "Temperature: " + weather.current.temp + " F";
+  weatherContainerEl.appendChild(tempEl);
+// Creating a div and adding the wind speed to it to display on the page.
+  var windSpeedEl = document.createElement("div");
+  windSpeedEl.textContent = "Wind: " + weather.current.wind_speed + " MPH";
+  weatherContainerEl.appendChild(windSpeedEl);
+// Creating a div and adding the humidity to it to display on the page.
+  var humidityEl = document.createElement("div");
+  humidityEl.textContent = "Humidity: " + weather.current.humidity + " %";
+  weatherContainerEl.appendChild(humidityEl);
+// Creating a div and adding the UV index to display on the page.
+  var uvIndexEl = document.createElement("div");
+  uvIndexEl.textContent = "UV Index: " + weather.current.uvi;
+  weatherContainerEl.appendChild(uvIndexEl);
 };
 
-var displayForecast = function() {
+var displayForecast = function(futureweather, searchTerm) {
 
-  
-  
-  // for (var i = 0; i < 6; i++) {
-  //   var cityName = cities[i].current.temp
-  // }
+  weatherContainerEl.textContent = "";
+  forecastContainerEl.textContent = searchTerm;
+
+  // var cityName = cities[i].current.temp
+  for (var i = 0; i < 5; i++) {
+
+   var futureDays = moment().add(i, 'days').format('L');
+   var futureDaysEl = document.createElement("h3");
+   futureDaysEl.textContent = futureDays;
+   forecastContainerEl.appendChild(futureDaysEl);
+
+   var tempEl = document.createElement("div");
+   tempEl.textContent = "Temperature: " + futureweather.current.temp + "F";
+   forecastContainerEl.appendChild(tempEl);
+
+   var windSpeedEl = document.createElement("div");
+   windSpeedEl.textContent = "Wind: " + futureweather.current.wind_speed + " MPH";
+   forecastContainerEl.appendChild(windSpeedEl);
+
+   var humidityEl = document.createElement("div");
+   humidityEl.textContent = "Humidity: " + futureweather.current.humidity + " %";
+   forecastContainerEl.appendChild(humidityEl);
+
+  }
+
+
 }
 
 
@@ -130,10 +142,11 @@ var displayPreviousSearch = function(cities, searchForm) {
   citySearchFormEl.textContent = searchForm;
 
   var cityName = document.getElementById("")
-  cityName.textContent = 
+  // cityName.textContent = 
 
 
 }
+
 
 
 citySearchFormEl.addEventListener("submit", searchSubmitHandler);
