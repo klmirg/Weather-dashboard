@@ -79,14 +79,13 @@ var getWeather = function(citySearch) {
 
 // Figure out how to display the temperature, humidity, wind speed, and the UV index
 var displayWeather = function(weather, searchTerm) {
-
+console.log(weather);
   // Clearing what is in the weather container to display new content
   weatherContainerEl.textContent = "";
   forecastContainerEl.textContent = searchTerm;
   // This is a variable that allows me to use the weather icons for the page.
-  var weatherIcons = "http://openweathermap.org/img/wn/" + weather.weather[0].icon + ".png";
+  var weatherIcons = "http://openweathermap.org/img/wn/" + weather.current.weather[0].icon + ".png";
   var weatherIconEl = document.querySelector("#weather-icon");
-  // const {weatherIcons} = weather.weather[0];
   weatherContainerEl.innerHTML = `<img src=${weatherIcons}>`;
   
 
@@ -132,6 +131,10 @@ console.log(futureWeather);
    var futureDaysEl = document.createElement("h3");
    futureDaysEl.textContent = futureDays;
    forecastContainerEl.appendChild(futureDaysEl);
+
+   var weatherIcons = "http://openweathermap.org/img/wn/" + forecastWeather.weather[0].icon + ".png";
+   var weatherIconEl = document.querySelector("#weather-icon");
+   forecastContainerEl.innerHTML = `<img src=${weatherIcons}>`;
 
    var tempEl = document.createElement("div");
    tempEl.textContent = "Temperature: " + forecastWeather.temp.day + '\u00B0' + " F";
