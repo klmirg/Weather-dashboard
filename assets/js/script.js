@@ -22,7 +22,7 @@ var cityInputEl = document.querySelector(".form-input")
 
 var weatherContainerEl = document.querySelector("#weather-container");
 var forecastContainerEl = document.querySelector("#forecast-container");
-// var forecastSearchEl = document.querySelector("#forecast");
+var cityContainerEl = document.querySelector("#card");
  
 
 // var targetDate = new Date();
@@ -31,9 +31,13 @@ var forecastContainerEl = document.querySelector("#forecast-container");
 
 var searchSubmitHandler = function(event) {
   event.preventDefault();
-
+  // Creating a variable for what city you search for
   var citySearch = cityInputEl.value.trim();
-console.log(citySearch)
+  // Creating a place to put the current city you searched for and appending it to a container
+  var citySearchEl = document.createElement("h2");
+  citySearchEl.textContent = citySearch;
+  cityContainerEl.appendChild(citySearchEl);
+
   if (citySearch) {
     getWeather(citySearch);
     cityInputEl.value = "";
@@ -62,6 +66,7 @@ var getForecast = function(dataApi) {
 }
 
 var getWeather = function(citySearch) {
+
 // Creating the variable for what city is searched for
   var citySearch = cityInputEl.value.trim();
   
@@ -106,13 +111,13 @@ var displayWeather = function(weather, searchTerm) {
   weatherContainerEl.appendChild(uvIndexEl);
 };
 
-var displayForecast = function(futureWeather, searchTerm) {
 
-  console.log(futureWeather)
-  forecastContainerEl.textContent = searchTerm;
+var displayForecast = function(futureWeather) {
 
   // var cityName = cities[i].current.temp
   for (var i = 0; i < futureWeather.daily[5] ; i++) {
+    // Making a variable for future weather
+  var futureWeather = futureWeather.daily[i];
 
    var futureDays = moment().add(i, 'days').format('L');
    var futureDaysEl = document.createElement("h3");
@@ -120,15 +125,15 @@ var displayForecast = function(futureWeather, searchTerm) {
    forecastContainerEl.appendChild(futureDaysEl);
 
    var tempEl = document.createElement("div");
-   tempEl.textContent = "Temperature: " + futureWeather.current.temp + " F";
+   tempEl.textContent = "Temperature: " + futureWeather.temp + " F";
    forecastContainerEl.appendChild(tempEl);
 
    var windSpeedEl = document.createElement("div");
-   windSpeedEl.textContent = "Wind: " + futureWeather.current.wind_speed + " MPH";
+   windSpeedEl.textContent = "Wind: " + futureWeather.wind_speed + " MPH";
    forecastContainerEl.appendChild(windSpeedEl);
 
    var humidityEl = document.createElement("div");
-   humidityEl.textContent = "Humidity: " + futureWeather.current.humidity + " %";
+   humidityEl.textContent = "Humidity: " + futureWeather.humidity + " %";
    forecastContainerEl.appendChild(humidityEl);
 
   }
