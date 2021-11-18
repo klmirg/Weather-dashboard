@@ -25,9 +25,9 @@ var forecastContainerEl = document.querySelector("#forecast-container");
 // var forecastSearchEl = document.querySelector("#forecast");
  
 
-var targetDate = new Date();
-targetDate.setDate(targetDate.getDate() + 5);
-console.log(targetDate);
+// var targetDate = new Date();
+// targetDate.setDate(targetDate.getDate() + 5);
+// console.log(targetDate);
 
 var searchSubmitHandler = function(event) {
   event.preventDefault();
@@ -108,7 +108,6 @@ var displayWeather = function(weather, searchTerm) {
 
 var displayForecast = function(futureweather, searchTerm) {
 
-  weatherContainerEl.textContent = "";
   forecastContainerEl.textContent = searchTerm;
 
   // var cityName = cities[i].current.temp
@@ -120,7 +119,7 @@ var displayForecast = function(futureweather, searchTerm) {
    forecastContainerEl.appendChild(futureDaysEl);
 
    var tempEl = document.createElement("div");
-   tempEl.textContent = "Temperature: " + futureweather.current.temp + "F";
+   tempEl.textContent = "Temperature: " + futureweather.current.temp + " F";
    forecastContainerEl.appendChild(tempEl);
 
    var windSpeedEl = document.createElement("div");
@@ -132,8 +131,6 @@ var displayForecast = function(futureweather, searchTerm) {
    forecastContainerEl.appendChild(humidityEl);
 
   }
-
-
 }
 
 
