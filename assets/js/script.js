@@ -12,8 +12,6 @@
 // I am presented with current and future conditions for that city
 
 
-// "https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=hourly,daily&appid=304018960801880d53656057e380d93a"
-
 // created a variable for my API key
 var myKey = "304018960801880d53656057e380d93a";
 
@@ -60,7 +58,7 @@ var getForecast = function(dataApi) {
  fetch(apiUrl).then(function(response) {
    response.json().then(function(data) {
      displayWeather(data, dataApi);
-     displayForecast(data, dataApi);
+     displayForecast(data);
    })
  });
 }
@@ -85,11 +83,14 @@ var displayWeather = function(weather, searchTerm) {
   // Clearing what is in the weather container to display new content
   weatherContainerEl.textContent = "";
   forecastContainerEl.textContent = searchTerm;
-  // This allows me to use the weather icons for the page.
-  var weatherIcons = "http://openweathermap.org/img/wn/10d@2x.png"
+  // This is a variable that allows me to use the weather icons for the page.
+  // var weatherIcons = "http://openweathermap.org/img/wn/" + weather.weather[0].icon + ".png";
+  // var weatherIconEl = document.querySelector("#weather-icon");
+  // weatherContainerEl.innerHTML = `<img src=${weatherIcons}>`;
 
+  // This is displaying the current date
   var currentDay = moment().format('MMMM Do YYYY');
-  var currentDayEl = document.createElement("h2");
+  var currentDayEl = document.createElement("h3");
   currentDayEl.textContent = currentDay;
   weatherContainerEl.appendChild(currentDayEl);
 
@@ -113,11 +114,11 @@ var displayWeather = function(weather, searchTerm) {
 
 
 var displayForecast = function(futureWeather) {
-
+console.log(futureWeather);
   // var cityName = cities[i].current.temp
-  for (var i = 0; i < futureWeather.daily[5] ; i++) {
+  for (var i = 1; i < 5 ; i++) {
     // Making a variable for future weather
-  var futureWeather = futureWeather.daily[i];
+  var forecastWeather = futureWeather.daily[i];
 
    var futureDays = moment().add(i, 'days').format('L');
    var futureDaysEl = document.createElement("h3");
@@ -125,15 +126,15 @@ var displayForecast = function(futureWeather) {
    forecastContainerEl.appendChild(futureDaysEl);
 
    var tempEl = document.createElement("div");
-   tempEl.textContent = "Temperature: " + futureWeather.temp + " F";
+   tempEl.textContent = "Temperature: " + forecastWeather.temp.day + " F";
    forecastContainerEl.appendChild(tempEl);
 
    var windSpeedEl = document.createElement("div");
-   windSpeedEl.textContent = "Wind: " + futureWeather.wind_speed + " MPH";
+   windSpeedEl.textContent = "Wind: " + forecastWeather.wind_speed + " MPH";
    forecastContainerEl.appendChild(windSpeedEl);
 
    var humidityEl = document.createElement("div");
-   humidityEl.textContent = "Humidity: " + futureWeather.humidity + " %";
+   humidityEl.textContent = "Humidity: " + forecastWeather.humidity + " %";
    forecastContainerEl.appendChild(humidityEl);
 
   }
