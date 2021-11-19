@@ -51,10 +51,10 @@ for(var i=searchHistory.length -1; i >=0; i--){
   button.setAttribute("type", "button")
   button.setAttribute("class", "historyBtn")
 
-  button.setAttribute("data-search", searchHistory[i])
-  button.textContent = searchHistory[i]
+  button.setAttribute("data-search", searchHistory[i]);
+  button.textContent = searchHistory[i];
+  button.onclick = function (e) { getWeather(e.target.textContent)};
   searchHistoryEl.append(button);
-  button.onclick = getWeather(citySearch);
   }
 }
 
@@ -78,10 +78,10 @@ var getForecast = function(dataApi) {
 var getWeather = function(citySearch) {
 
 // Creating the variable for what city is searched for
-  var citySearch = cityInputEl.value.trim();
+  // var citySearch = cityInputEl.value.trim();
 
-  if (cityInputEl.value != "") { citySearch = cityInputEl.value.trim() }
-  
+  // if (cityInputEl.value != "") { citySearch = cityInputEl.value.trim() }
+  console.log("running weather")
   var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + citySearch + "&appid=" + myKey + "&units=imperial";
   fetch(apiUrl).then(function(response) {
     response.json().then(function(data) {
