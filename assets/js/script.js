@@ -54,6 +54,8 @@ for(var i=searchHistory.length -1; i >=0; i--){
   button.setAttribute("data-search", searchHistory[i])
   button.textContent = searchHistory[i]
   searchHistoryEl.append(button);
+  button.onclick = displayWeather;
+  // button.onclick = displayForecast;
   }
 }
 
@@ -179,6 +181,6 @@ console.log(futureWeather);
 //   // cityName.textContent = 
 // }
 
-searchHistoryEl.addEventListener("click",)
+// searchHistoryEl.addEventListener("click",)
 
 citySearchFormEl.addEventListener("submit", searchSubmitHandler);
