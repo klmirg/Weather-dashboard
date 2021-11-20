@@ -13,39 +13,30 @@
   <header class="hero">
     <h1> Weather Dashboard </h1>
   </header>
-
-  <main class="flex-row justify-space-between">
-    <div class="col-12 col-md-4">
-      <div class="card">
-        <h2 class="card-header">Search for a City:</h2>
+  <main class="flex-row">
+    <div class="col-4 col-md-4">
+        <h2>Search for a City:</h2>
         <form id="search-form" class="card-body">
           <label class="form-label"></label>
           <input type="text" class="form-input" placeholder="Enter City Name"/>
           <button type="submit" class="btn btn-primary" id="searchBtn">Search</button>
         </form>
-      </div>
-
-      <div class="col-12 col-md-4">
         <div id="searchHistory" class="list-group">
-
         </div>
-      </div>
-
-      <div class="col-12 col-md-4">
-        <div id="weather-container">
-          <div class="weather-icon"><img id="weather-icon" /></div>
-        </div>
-      </div>
-
-      <div class="col-12 col-md-8">
-        <h3 class="subtitle">5-day Forecast: </h3><span id="forecast"></span>
-        <div id="forecast-container" class="list-group"></div>
-        <!-- <div class="weather-icon"><img id="weathericon" /></div> -->
-      </div>
-
-
     </div>
+      <div class="float-right col-8 border border-dark align-self-start" id="weather-container">
+      </div> 
+      
+      <div id="container2 row">
+        <div class="justify-space-between">
+          <h3 class="subtitle">5-day Forecast: </h3>
+          <div id="forecast-container" class="list-group flex-row"></div>
+        </div>
+      </div>
+    
   </main>
+
+ 
  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <script src="assets/js/script.js"></script>

@@ -11,10 +11,6 @@ var forecastContainerEl = document.querySelector("#forecast-container");
 var searchHistoryEl = document.getElementById("searchHistory");
  
 
-// var targetDate = new Date();
-// targetDate.setDate(targetDate.getDate() + 5);
-// console.log(targetDate);
-
 var searchSubmitHandler = function(event) {
   event.preventDefault();
   // Creating a variable for what city you search for
@@ -104,14 +100,14 @@ var displayWeather = function(weather, searchTerm) {
   weatherContainerEl.innerHTML = `<img src=${weatherIcons}>`;
 
   // This is displaying the current date
-  var currentDay = moment().format('MMMM Do YYYY');
+  var currentDay = moment().format('(L)');
   var currentDayEl = document.createElement("h3");
   currentDayEl.textContent = currentDay;
   weatherContainerEl.appendChild(currentDayEl);
 
 // Creating a div and adding the temperature to it to display on the page.
   var tempEl = document.createElement("div");
-  tempEl.textContent = "Temperature: " + weather.current.temp + '\u00B0' + " F";
+  tempEl.textContent = "Temp: " + weather.current.temp + '\u00B0' + " F";
   weatherContainerEl.appendChild(tempEl);
 // Creating a div and adding the wind speed to it to display on the page.
   var windSpeedEl = document.createElement("div");
@@ -149,38 +145,42 @@ console.log(futureWeather);
     // Making a variable for future weather
   var forecastWeather = futureWeather.daily[i];
 
+  var nextFiveDaysContainer = document.createElement("div");
+  // nextFiveDaysContainer.setAttribute("id", i);
+  nextFiveDaysContainer.setAttribute("class", "bg-dark text-white");
+  forecastContainerEl.appendChild(nextFiveDaysContainer);
+
    var futureDays = moment().add(i, 'days').format('L');
    var futureDaysEl = document.createElement("h3");
    futureDaysEl.textContent = futureDays;
-   forecastContainerEl.appendChild(futureDaysEl);
-
-   var tempEl = document.createElement("div");
-   tempEl.textContent = "Temperature: " + forecastWeather.temp.day + '\u00B0' + " F";
-   forecastContainerEl.appendChild(tempEl);
-
-   var windSpeedEl = document.createElement("div");
-   windSpeedEl.textContent = "Wind: " + forecastWeather.wind_speed + " MPH";
-   forecastContainerEl.appendChild(windSpeedEl);
-
-   var humidityEl = document.createElement("div");
-   humidityEl.textContent = "Humidity: " + forecastWeather.humidity + " %";
-   forecastContainerEl.appendChild(humidityEl);
+   nextFiveDaysContainer.appendChild(futureDaysEl);
 
    var icon = document.createElement("img");
    icon.style.width = "50px";
+   icon.style.height = "50px";
    icon.src = "http://openweathermap.org/img/wn/" + forecastWeather.weather[0].icon + ".png";
-   
+
    forecastContainerEl.appendChild(icon);
+
+   var tempEl = document.createElement("div");
+   tempEl.textContent = "Temp: " + forecastWeather.temp.day + '\u00B0' + " F";
+   nextFiveDaysContainer.appendChild(tempEl);
+
+   var windSpeedEl = document.createElement("div");
+   windSpeedEl.textContent = "Wind: " + forecastWeather.wind_speed + " MPH";
+   nextFiveDaysContainer.appendChild(windSpeedEl);
+
+   var humidityEl = document.createElement("div");
+   humidityEl.textContent = "Humidity: " + forecastWeather.humidity + " %";
+   nextFiveDaysContainer.appendChild(humidityEl);
+
+  //  var icon = document.createElement("img");
+  //  icon.style.width = "50px";
+  //  icon.src = "http://openweathermap.org/img/wn/" + forecastWeather.weather[0].icon + ".png";
+   
+  //  forecastContainerEl.appendChild(icon);
   }
 }
-
-// var displayPreviousSearch = function(cities, searchForm) {
-
-//   citySearchFormEl.textContent = searchForm;
-
-//   var cityName = document.getElementById("")
-//   // cityName.textContent = 
-// }
 
 // searchHistoryEl.addEventListener("click",)
 

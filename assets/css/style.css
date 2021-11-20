@@ -13,11 +13,18 @@ h1, h2, h3 {
   line-height: 1.25;
 }
 
-.card {
+#forecast-container {
+  line-height: 1.5;
+}
+/* .card {
   border-bottom: #808080 solid 1px;
-  padding-bottom: 15px;
-  display: inline-block;
+  padding-bottom: 15px; 
+   display: inline-block; 
   
+} */
+.form-input {
+  border-radius: 5px;
+  line-height: 2;
 }
 
 .btn {
@@ -25,6 +32,17 @@ h1, h2, h3 {
   margin-top: 7px;
   width: 100%;
   background-color: #5390d9;
+}
+
+.historyBtn {
+  margin-top: 10px;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.list-group {
+  display: flex;
+  flex-direction: row;
 }
 
 .btn-inline {
@@ -36,10 +54,22 @@ h1, h2, h3 {
   width: 100%;
 }
 
-#weather-container {
+/* #weather-container {
   
-}
+} */
 
+/* .container1 {
+display: flex;
+position: relative;
+float: right;
+bottom: 200px;
+left: 100px;
+max-width: 100%;
+} */
+
+
+
+/* 
 .weather {
   background:chartreuse;
 }
@@ -58,5 +88,5 @@ h1, h2, h3 {
 
 .danger{
   color: purple;
-}
+} */
 
