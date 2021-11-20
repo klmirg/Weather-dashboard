@@ -14,7 +14,7 @@ h1, h2, h3 {
 }
 
 #forecast-container {
-  line-height: 1.5;
+  line-height: 2em;
 }
 /* .card {
   border-bottom: #808080 solid 1px;
@@ -22,6 +22,12 @@ h1, h2, h3 {
    display: inline-block; 
   
 } */
+#weather-container {
+  position: relative;
+  left: 5px;
+  top: -200px;
+  line-height: 2em;
+}
 .form-input {
   border-radius: 5px;
   line-height: 2;
