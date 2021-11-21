@@ -9,24 +9,27 @@
 
 
 h1, h2, h3 {
-  /* margin: 0; */
   line-height: 1.25;
 }
 
 #forecast-container {
   line-height: 2em;
 }
-/* .card {
-  border-bottom: #808080 solid 1px;
-  padding-bottom: 15px; 
-   display: inline-block; 
-  
-} */
+
 #weather-container {
   position: relative;
   left: 5px;
   top: -200px;
   line-height: 2em;
+}
+
+.container-fluid {
+  max-width: 95%;
+}
+
+.bg-dark {
+  margin-left: 50px;
+
 }
 .form-input {
   border-radius: 5px;
@@ -60,39 +63,5 @@ h1, h2, h3 {
   width: 100%;
 }
 
-/* #weather-container {
-  
-} */
 
-/* .container1 {
-display: flex;
-position: relative;
-float: right;
-bottom: 200px;
-left: 100px;
-max-width: 100%;
-} */
-
-
-
-/* 
-.weather {
-  background:chartreuse;
-}
-
-.safe{
-  color: green;
-}
-
-.mild{
-  color: orange
-}
-
-.high{
-  color: red;
-}
-
-.danger{
-  color: purple;
-} */
 

@@ -95,7 +95,7 @@ var displayWeather = function(weather, searchTerm) {
   // forecastContainerEl.textContent = searchTerm;
   forecastContainerEl.innerHTML = "";
   // This is a variable that allows me to use the weather icons for the page.
-  var weatherIcons = "http://openweathermap.org/img/wn/" + weather.current.weather[0].icon + ".png";
+  var weatherIcons = "http://openweathermap.org/img/w/" + weather.current.weather[0].icon + ".png";
   var weatherIconEl = document.querySelector("#weather-icon");
   weatherContainerEl.innerHTML = `<img src=${weatherIcons}>`;
 
@@ -141,7 +141,7 @@ var displayWeather = function(weather, searchTerm) {
 var displayForecast = function(futureWeather) {
 console.log(futureWeather);
   // for loop to loop through the 5 days
-  for (var i = 0; i < 5 ; i++) {
+  for (var i = 1; i < 6 ; i++) {
     // Making a variable for future weather
   var forecastWeather = futureWeather.daily[i];
 
@@ -158,9 +158,9 @@ console.log(futureWeather);
    var icon = document.createElement("img");
    icon.style.width = "50px";
    icon.style.height = "50px";
-   icon.src = "http://openweathermap.org/img/wn/" + forecastWeather.weather[0].icon + ".png";
+   icon.src = "http://openweathermap.org/img/w/" + forecastWeather.weather[0].icon + ".png";
 
-   forecastContainerEl.appendChild(icon);
+   nextFiveDaysContainer.appendChild(icon);
 
    var tempEl = document.createElement("div");
    tempEl.textContent = "Temp: " + forecastWeather.temp.day + '\u00B0' + " F";
