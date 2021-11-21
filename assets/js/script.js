@@ -94,6 +94,11 @@ var displayWeather = function(weather, searchTerm) {
   var weatherIconEl = document.querySelector("#weather-icon");
   weatherContainerEl.innerHTML = `<img src=${weatherIcons}>`;
 
+  var city = searchHistory;
+  var cityEl = document.createElement("h3");
+  cityEl.textContent = city;
+  weatherContainerEl.appendChild(cityEl);
+
   // This is displaying the current date
   var currentDay = moment().format('(L)');
   var currentDayEl = document.createElement("h3");
