@@ -1,4 +1,6 @@
-
+* {
+  font-size: 13px;
+}
 .hero {
   padding: 0;
   background-color: #0077b6;
@@ -9,17 +11,10 @@
   padding-top: 20px;
 }
 
-
-h1, h2, h3 {
+h1, h2 {
   line-height: 1;
+  text-align: center;
 }
-
-/* #forecast-container {
-  line-height: 2em;
-  position: relative;
-  left: 300px;
-  top: 100px;
-} */
 
 .search-form {
   border-bottom: solid ;
@@ -29,19 +24,20 @@ h1, h2, h3 {
 #container2 {
   line-height: 2em;
   position: relative;
-  left: 300px;
-  top: 0px;
+  left: 270px;
+  bottom: 20px;
 }
+
 #container2 h3 {
   position: relative;
-  left: 50px;
+  left: 20px;
   top: 0px;
 }
 
 #weather-container {
   position: relative;
-  left: 30px;
-  top: 4px;
+  right: 30px;
+  top: 10px;
   line-height: 2em;
   margin-bottom: 50px;
 }
@@ -58,12 +54,14 @@ h1, h2, h3 {
 }
 
 .bg-dark {
-  margin-left: 50px;
+  margin-left: 20px;
+  padding: 5px;
+  padding-right: 52px;
 }
 
 .form-input {
   border-radius: 5px;
-  line-height: 2;
+  line-height: 2.5;
 }
 
 .btn {
@@ -76,21 +74,11 @@ h1, h2, h3 {
 .historyBtn {
   margin-top: 10px;
   border-radius: 5px;
-  width: 100%;
+  width: 88%;
   background-color: darkgrey;
 }
 
-/* .list-group {
-  display: flex;
-  flex-direction: row;
-} */
-
-/* .btn-inline {
-  display: inline;
-} */
-
 .form-label, .form-input, .form-textarea {
-  /* display: block; */
   width: 100%;
 }
 
