@@ -5,27 +5,45 @@
   background-image: linear-gradient(.25turn, #0077b6, 50%,#03045e );
   color:#fff;
   text-align: center;
+  padding-bottom: 20px;
+  padding-top: 20px;
 }
 
 
 h1, h2, h3 {
-  line-height: 1.25;
+  line-height: 1;
 }
 
-#forecast-container {
+/* #forecast-container {
   line-height: 2em;
   position: relative;
   left: 300px;
   top: 100px;
+} */
 
+.search-form {
+  border-bottom: solid ;
+  display: inline-block;
+}
 
+#container2 {
+  line-height: 2em;
+  position: relative;
+  left: 300px;
+  top: 0px;
+}
+#container2 h3 {
+  position: relative;
+  left: 50px;
+  top: 0px;
 }
 
 #weather-container {
   position: relative;
   left: 30px;
-  top: 5px;
+  top: 4px;
   line-height: 2em;
+  margin-bottom: 50px;
 }
 
 .flex-column {
@@ -39,15 +57,10 @@ h1, h2, h3 {
   align-items: start;
 }
 
-/* .container-fluid {
-  max-width: 95%;
-} */
-
 .bg-dark {
   margin-left: 50px;
-  
-
 }
+
 .form-input {
   border-radius: 5px;
   line-height: 2;
@@ -64,19 +77,20 @@ h1, h2, h3 {
   margin-top: 10px;
   border-radius: 5px;
   width: 100%;
+  background-color: darkgrey;
 }
 
-.list-group {
+/* .list-group {
   display: flex;
   flex-direction: row;
-}
+} */
 
-.btn-inline {
+/* .btn-inline {
   display: inline;
-}
+} */
 
 .form-label, .form-input, .form-textarea {
-  display: block;
+  /* display: block; */
   width: 100%;
 }
 

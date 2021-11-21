@@ -7,7 +7,6 @@ var cityInputEl = document.querySelector(".form-input")
 
 var weatherContainerEl = document.querySelector("#weather-container");
 var forecastContainerEl = document.querySelector("#forecast-container");
-//var cityContainerEl = document.querySelector("#card");
 var searchHistoryEl = document.getElementById("searchHistory");
  
 
@@ -54,9 +53,6 @@ for(var i=searchHistory.length -1; i >=0; i--){
   }
 }
 
-
-//var savedSearch = JSON.parse(localStorage.getItem("citySearch")) || [];
-
 var getForecast = function(dataApi) {
 // Creating the variables for latitude and longitude
   var latitude = dataApi.coord.lat;
@@ -92,7 +88,6 @@ var displayWeather = function(weather, searchTerm) {
 
   // Clearing what is in the weather container to display new content
   weatherContainerEl.textContent = "";
-  // forecastContainerEl.textContent = searchTerm;
   forecastContainerEl.innerHTML = "";
   // This is a variable that allows me to use the weather icons for the page.
   var weatherIcons = "http://openweathermap.org/img/w/" + weather.current.weather[0].icon + ".png";
@@ -129,9 +124,6 @@ var displayWeather = function(weather, searchTerm) {
   } else if(uvIndex < 10){
     uvIndexEl.setAttribute("class", "btn-danger")
   } 
-  // else {
-  //   uvIndexEl.setAttribute("class", "danger")
-  // }
 
   uvIndexEl.textContent = "UV Index: " + uvIndex;
   weatherContainerEl.appendChild(uvIndexEl);
@@ -151,7 +143,7 @@ console.log(futureWeather);
   forecastContainerEl.appendChild(nextFiveDaysContainer);
 
    var futureDays = moment().add(i, 'days').format('L');
-   var futureDaysEl = document.createElement("h3");
+   var futureDaysEl = document.createElement("h4");
    futureDaysEl.textContent = futureDays;
    nextFiveDaysContainer.appendChild(futureDaysEl);
 
@@ -174,11 +166,6 @@ console.log(futureWeather);
    humidityEl.textContent = "Humidity: " + forecastWeather.humidity + " %";
    nextFiveDaysContainer.appendChild(humidityEl);
 
-  //  var icon = document.createElement("img");
-  //  icon.style.width = "50px";
-  //  icon.src = "http://openweathermap.org/img/wn/" + forecastWeather.weather[0].icon + ".png";
-   
-  //  forecastContainerEl.appendChild(icon);
   }
 }
 
