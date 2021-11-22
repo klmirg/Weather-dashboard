@@ -53,10 +53,11 @@ h1, h2 {
   align-items: start;
 }
 
-.bg-dark {
+.text-white {
   margin-left: 20px;
   padding: 5px;
   padding-right: 52px;
+  background-color:midnightblue;
 }
 
 .form-input {

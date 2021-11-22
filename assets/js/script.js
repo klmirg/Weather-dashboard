@@ -83,12 +83,15 @@ var getWeather = function(citySearch) {
   })
 }
 
-// Figure out how to display the temperature, humidity, wind speed, and the UV index
+// This is the function to display all the current weather conditions, temp, windspeed, current UV Index
 var displayWeather = function(weather, searchTerm) {
 
   // Clearing what is in the weather container to display new content
   weatherContainerEl.textContent = "";
   forecastContainerEl.innerHTML = "";
+
+  weatherContainerEl.setAttribute("class", "col-8 border border-dark")
+
   // This is a variable that allows me to use the weather icons for the page.
   var weatherIcons = "http://openweathermap.org/img/w/" + weather.current.weather[0].icon + ".png";
   var weatherIconEl = document.querySelector("#weather-icon");
@@ -96,13 +99,12 @@ var displayWeather = function(weather, searchTerm) {
 
   var city = searchHistory;
   var cityEl = document.createElement("h3");
-  cityEl.textContent = city;
   weatherContainerEl.appendChild(cityEl);
 
   // This is displaying the current date
   var currentDay = moment().format('(L)');
   var currentDayEl = document.createElement("h3");
-  currentDayEl.textContent = currentDay;
+  currentDayEl.textContent = city + currentDay;
   weatherContainerEl.appendChild(currentDayEl);
 
 // Creating a div and adding the temperature to it to display on the page.
@@ -144,7 +146,7 @@ console.log(futureWeather);
 
   var nextFiveDaysContainer = document.createElement("div");
   // nextFiveDaysContainer.setAttribute("id", i);
-  nextFiveDaysContainer.setAttribute("class", "bg-dark text-white");
+  nextFiveDaysContainer.setAttribute("class", "text-white");
   forecastContainerEl.appendChild(nextFiveDaysContainer);
 
    var futureDays = moment().add(i, 'days').format('L');
