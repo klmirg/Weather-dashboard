@@ -69,16 +69,10 @@ var getForecast = function(dataApi) {
 
 var getWeather = function(citySearch) {
 
-// Creating the variable for what city is searched for
-  // var citySearch = cityInputEl.value.trim();
-
-  // if (cityInputEl.value != "") { citySearch = cityInputEl.value.trim() }
-  console.log("running weather")
   var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + citySearch + "&appid=" + myKey + "&units=imperial";
   fetch(apiUrl).then(function(response) {
     response.json().then(function(data) {
       getForecast(data); 
-      // displayForecast(data, citySearch);
     })
   })
 }
@@ -97,14 +91,10 @@ var displayWeather = function(weather, searchTerm) {
   var weatherIconEl = document.querySelector("#weather-icon");
   weatherContainerEl.innerHTML = `<img src=${weatherIcons}>`;
 
-  var city = searchHistory;
-  var cityEl = document.createElement("h3");
-  weatherContainerEl.appendChild(cityEl);
-
   // This is displaying the current date
   var currentDay = moment().format('(L)');
   var currentDayEl = document.createElement("h3");
-  currentDayEl.textContent = city + currentDay;
+  currentDayEl.textContent = currentDay;
   weatherContainerEl.appendChild(currentDayEl);
 
 // Creating a div and adding the temperature to it to display on the page.
@@ -145,7 +135,6 @@ console.log(futureWeather);
   var forecastWeather = futureWeather.daily[i];
 
   var nextFiveDaysContainer = document.createElement("div");
-  // nextFiveDaysContainer.setAttribute("id", i);
   nextFiveDaysContainer.setAttribute("class", "text-white");
   forecastContainerEl.appendChild(nextFiveDaysContainer);
 
@@ -175,7 +164,5 @@ console.log(futureWeather);
 
   }
 }
-
-// searchHistoryEl.addEventListener("click",)
 
 citySearchFormEl.addEventListener("submit", searchSubmitHandler);
